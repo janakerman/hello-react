@@ -3,16 +3,19 @@ import {Router} from 'react-router';
 import Repos from './Github/Repos';
 import UserProfile from './Github/UserProfile';
 import Notes from './Notes/Notes';
+import ReactMixin from 'react-mixin';
+import ReactLocalStorage from 'react-localstorage';
 
 export default class Profile extends React.Component {
 
-  constructor() {
-    super();
-    this.state = {
-      notes: [1, 2, 3],
-      bio: { name: "Jan"},
-      repos: ["a", "b", "c"]
-    };
+  state = {
+    notes: [1, 2, 3],
+    bio: { name: "Jan"},
+    repos: ["a", "b", "c"]
+  };
+
+  getLocalStorageKey() {
+    return this.props.params.username;
   }
 
   render() {
@@ -32,3 +35,4 @@ export default class Profile extends React.Component {
   }
 
 }
+ReactMixin.onClass(Profile, ReactLocalStorage);
